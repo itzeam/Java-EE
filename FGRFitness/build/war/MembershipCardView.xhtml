@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="cardId" value="#{showCard.cardId}"/>
+    </f:metadata>
+      <ui:fragment rendered="#{!login.logged}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be <strong>logged</strong>.
+                </div>
+            </ui:fragment>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Card details</h1>
+            </div>
+            <h:form>
+            	<div class="col-md-6">
+            		<p>
+            			<b>Id: </b>
+            			#{showCard.card.cardId}
+            		</p>
+            		<p>
+            			<b>Name: </b>
+            			#{showCard.card.cardType}
+            		</p>
+            		<p>
+            			<b>Surname: </b>
+            			#{showCard.card.price}
+            		</p>
+            		<h:link outcome="SearchManagerView" class="btn btn-primary" value="back" />
+            		<h:link outcome="MembershipCardView" class="btn btn-primary" value="View card">
+                               <f:param name="id" value="#{showMember.member.id}" />
+                    </h:link>
+            	</div>
+            	 <div class="text-right">
+                    <h:link outcome="AddMembershipCardView"> Add card
+                               <f:param name="id" value="#{showCard.member.id}" />
+                               <span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span>
+                     </h:link>
+                </div>
+             </h:form>
+       
+        </ui:define>
+    </ui:composition>
+     
+</html>
+
+            			
+
+ 

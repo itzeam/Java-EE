@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="id" value="#{showMember.id}"/>
+    </f:metadata>
+      <ui:fragment rendered="#{!login.logged}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be <strong>member</strong>.
+                </div>
+            </ui:fragment>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Show Member</h1>
+            </div>
+            <h:form>
+            	<div class="col-md-6">
+            		<p>
+            			<b>Id: </b>
+            			#{showMember.member.id}
+            		</p>
+            		<p>
+            			<b>Name: </b>
+            			#{showMember.member.name}
+            		</p>
+            		<p>
+            			<b>Surname: </b>
+            			#{showMember.member.surname}
+            		</p>
+            		<p>
+            			<b>Address: </b>
+            			#{showMember.member.address}
+            		</p>
+            		<p>
+            			<b>Email: </b>
+            			#{showMember.member.email}
+            		</p>
+            		<p>
+            			<b>Phone: </b>
+            			#{showMember.member.phone}
+            		</p>
+            		<p>
+            			<b>Picture: </b>
+            			#{showMember.member.picture}
+            		</p>
+            		<h:commandLink action="#{removingUser.deleteUser}" onclick="ConfirmDeleteUser()">
+                            <f:param name="id" value="#{showMember.member.id}" />
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            delete
+                    </h:commandLink>
+            		<h:link outcome="SearchMemberView" class="btn btn-primary" value="back" />
+            		<h:link outcome="AddMembershipCardView" class="btn btn-primary" value="Add card">
+                               <f:param name="id" value="#{showMember.member.id}" />
+                    </h:link>
+            	</div>
+            	<div>
+            			<img src="#{request.contextPath}/resources/#{showMember.member.picture}" style="width: 35%; height: 35%"/>
+            	</div>
+             </h:form>
+       
+        </ui:define>
+    </ui:composition>
+     
+</html>
+
+            		
+
+ 

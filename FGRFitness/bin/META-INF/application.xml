@@ -1,0 +1,13 @@
+<application>
+    <display-name>FGRFitness</display-name>
+  <module>
+    <web>
+      <web-uri>FGRFitness.war</web-uri>
+      <context-root>/FGRFitness</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>FGRFitness.jar</ejb>
+  </module>
+</application>
+

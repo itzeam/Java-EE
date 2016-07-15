@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+	<f:metadata>
+      <f:viewParam name="topicId" value="#{topicComments.topicId}"/>   
+    </f:metadata>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>List of comments</h1>
+            </div>
+            <div class="table-responsive">
+            <h:form id="dataTableForm">
+                <h:dataTable value="#{topicComments.topicCommentListView}" var="item" class="table table-striped table-condensed">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Subject"/>
+                        </f:facet>
+                        <h:outputText value="#{item.subject}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Body"/>
+                        </f:facet>
+                        <h:outputText value="#{item.body}" />
+                    </h:column>
+                    <h:column rendered="#{!login.isManager and login.logged}">
+                        <h:link outcome="ReplyQuestionView" value="Reply" >
+							<f:param name="topicId" value="#{topicComments.topicId}"/>		
+							<f:param name="questionId" value="#{item.messageId}" />				
+						</h:link>  
+                    </h:column>
+                    <h:column rendered="#{login.isManager and login.logged}">
+                         <h:commandLink action="#{removing.deleteMessage}">
+                            <f:param name="questionId" value="#{item.messageId}" />
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            delete
+                        </h:commandLink>
+                    </h:column>
+                    <h:column rendered="#{!login.isManager and login.logged}">
+                     <f:facet name="header">
+                            <h:link outcome="AskQuestionView">
+                             <f:param name="topicId" value="#{topicComments.topicId}"/>
+                              <span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span>
+                                add
+                            </h:link>
+                        </f:facet>
+                       
+                    </h:column>
+                     </h:dataTable>
+                       <div class="text-right">
+                    <div class="btn-group text-right" role="group">
+                    <h:link outcome="TopicListView" class="btn btn-primary" value="back" />
+                    </div>
+                </div>
+            </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Register manager</h1>
+            </div>
+            <h:form id="dataAddForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <h:outputLabel value="ID" />
+                    <h:inputText class="form-control" value="#{newmanager.id}" required="true" requiredMessage="Id required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Name" />
+                    <h:inputText class="form-control" value="#{newmanager.name}" required="true" requiredMessage="Name required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Surname" />
+                    <h:inputText class="form-control" value="#{newmanager.surname}" required="true" requiredMessage="Surname required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Phone" />
+                    <h:inputText class="form-control" value="#{newmanager.phone}" required="true" requiredMessage="Phone required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Password" />
+                    <h:inputSecret class="form-control" value="#{newmanager.password}" required="true" requiredMessage="Password required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Email" />
+                    <h:inputText class="form-control" value="#{newmanager.email}" required="true" requiredMessage="Email required" />
+                </div>
+				<div class="form-group">
+                    <h:outputLabel value="Address" />
+                    <h:inputText class="form-control" value="#{newmanager.address}" required="true" requiredMessage="Address required" />
+                </div>
+                <div class="form-group">
+                   <h:outputLabel value="Picture" />
+                   <h:inputFile id="file" value="#{newmanager.file}"/>
+                   
+                </div>
+                <div class="text-right">
+                 <h:link outcome="Welcome" class="btn btn-primary" value="back" />
+                <h:commandButton type="submit" class="btn btn-primary" action="#{newmanager.addManager}" value="Register" onclick="ConfirmAddUser()"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

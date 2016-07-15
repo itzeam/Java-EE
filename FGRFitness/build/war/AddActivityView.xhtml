@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+   
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Adding activity</h1>
+            </div>
+            <ui:fragment rendered="#{!login.logged}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be <strong>logged</strong>.
+                </div>
+            </ui:fragment>
+            <ui:fragment rendered="#{login.logged}">
+            <h:form id="dataAddForm" enctype="multipart/form-data">
+             	<div class="form-group">
+                    <h:outputLabel value="Category" />  <br/>
+                    <h:selectOneMenu valueChangeListener="#{newActivity.categoryValueChanged}" value="#{newActivity.selectedCategory}" immediate="true" >
+		 				<f:selectItems value="#{newActivity.categoriesList}" />        
+		 			</h:selectOneMenu>
+                </div>
+             	<div class="form-group">
+                    <h:outputLabel value="Name" />
+                    <h:inputText class="form-control" value="#{newActivity.name}" required="true" requiredMessage="You must set a name fot the activity" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Description" />
+                    <h:inputText class="form-control" value="#{newActivity.description}" required="true" requiredMessage="You must set a description fot the activity"/>
+                </div>
+                 <div class="form-group">
+                   <h:outputLabel value="Picture" />
+                   <h:inputFile id="file" value="#{newActivity.file}"/>   
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Level" /> 
+                    <h:selectOneMenu value="#{newActivity.selectedLevel}">
+		 				<f:selectItem itemValue="ADVANCED"/>    
+		 				<f:selectItem itemValue="INTERMEDIATE"/>  
+		 				<f:selectItem itemValue="BEGINNER"/>       
+		 			</h:selectOneMenu>
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Number of users" />
+                    <h:inputText class="form-control" value="#{newActivity.maxUsers}" required="true" requiredMessage="You must introduce the number of places" >
+                    	<f:convertNumber type="number" integerOnly="true" minIntegerDigits="1"/>
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                     <h:outputLabel value="Day" />
+                    <h:inputText id="date" class="datepicker" value="#{newActivity.date}" required="true" requiredMessage="You must select a date">
+               			<f:convertDateTime pattern="dd-MM-yyyy" />
+					</h:inputText>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Time" /> 
+                    <h:selectOneMenu value="#{newActivity.selectedTime}">
+		 				<f:selectItem itemValue="08:00-09:00"/>    
+		 				<f:selectItem itemValue="09:00-10:00"/>  
+		 				<f:selectItem itemValue="10:00-11:00"/>  
+		 				<f:selectItem itemValue="11:00-12:00"/>  
+		 				<f:selectItem itemValue="12:00-13:00"/>  
+		 				<f:selectItem itemValue="13:00-14:00"/>  
+		 				<f:selectItem itemValue="14:00-15:00"/>  
+		 				<f:selectItem itemValue="15:00-16:00"/>  
+		 				<f:selectItem itemValue="16:00-17:00"/>  
+		 				<f:selectItem itemValue="17:00-18:00"/>  
+		 				<f:selectItem itemValue="18:00-19:00"/>  
+		 				<f:selectItem itemValue="19:00-20:00"/>        
+		 			</h:selectOneMenu>
+                </div>
+              
+                <div class="text-right">
+                    <div class="btn-group text-right" role="group">
+                    <h:link outcome="Welcome" class="btn btn-primary" value="back" />
+                    <h:commandButton type="submit" class="btn btn-primary" action="#{newActivity.SaveActivity}" value="add"  onclick="ConfirmAddActivity()"/>
+                    </div>
+                </div>
+            </h:form>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>
+</html>
+        
+    <!-- <input type="text" id="datepicker" /> -->   

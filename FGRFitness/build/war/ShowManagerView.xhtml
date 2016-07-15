@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="id" value="#{showManager.id}"/>
+    </f:metadata>
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Show Manager</h1>
+            </div>
+            <h:form>
+            	<div class="col-md-6">
+            	<p>
+            		<b>Id: </b>
+            		#{showManager.manager.id}
+            		</p>
+            		<p>
+            		<b>Name: </b>
+            		#{showManager.manager.name}
+            		</p>
+            		<p>
+            		<b>Surname: </b>
+            		#{showManager.manager.surname}
+            		</p>
+            		<p>
+            		<b>Address: </b>
+            		#{showManager.manager.address}
+            		</p>
+            		<p>
+            		<b>Email: </b>
+            		#{showManager.manager.email}
+            		</p>
+            		<p>
+            		<b>Picture: </b>
+            		#{showManager.manager.picture}
+            		</p>
+            		<p>
+            		<b>Phone: </b>
+            		#{showManager.manager.phone}
+            		</p>
+            		<h:commandLink action="#{removingUser.deleteUser}" onclick="ConfirmDeleteUser()">
+                            <f:param name="id" value="#{showManager.manager.id}" />
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            delete
+                    </h:commandLink>
+            	 <h:link outcome="SearchManagerView" class="btn btn-primary" value="back" />
+            	</div>
+            	<div>
+            			<img src="#{request.contextPath}/resources/#{showManager.manager.picture}" style="width: 35%; height: 35%"/>
+            	</div>
+             </h:form>
+       
+        </ui:define>
+    </ui:composition>
+     
+</html>
+            	

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Register a new topic</h1>
+            </div>
+            <ui:fragment rendered="#{!login.logged}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be <strong>logged</strong>.
+                </div>
+            </ui:fragment>
+             <ui:fragment rendered="#{!login.isManager}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be a<strong>manager</strong>.
+                </div>
+            </ui:fragment>
+            <ui:fragment rendered="#{login.isManager}">
+            <h:form id="dataAddForm">
+                <div class="form-group">
+                    <h:outputLabel value="Name" />
+                    <h:inputText class="form-control" value="#{adding.name}" required="true" requiredMessage="Name required" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Description" />
+                    <h:inputText class="form-control" value="#{adding.description}" required="true" requiredMessage="Description required" />
+                </div>
+              
+                <div class="text-right">
+                    <div class="btn-group text-right" role="group">
+                    <h:link outcome="TopicListView" class="btn btn-primary" value="back" />
+                    <h:commandButton type="submit" class="btn btn-primary" action="#{adding.addTopic}" value="add" onclick="ConfirmAddTopic()"/>
+                    </div>
+                </div>
+            </h:form>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>
+</html>

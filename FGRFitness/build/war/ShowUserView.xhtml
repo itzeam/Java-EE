@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="id" value="#{showUser.id}"/>
+    </f:metadata>
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Show user</h1>
+            </div>
+            <h:form>
+            	<div class="col-md-6">
+            		<p>
+            			<b>Id: </b>
+            			#{showUser.user.id}
+            		</p>
+            		<p>
+            			<b>Name: </b>
+            			#{showUser.user.name}
+            		</p>
+            		<p>
+            			<b>Surname: </b>
+            			#{showUser.user.surname}
+            		</p>
+            		<p>
+            			<b>Address: </b>
+            			#{showUser.user.address}
+            		</p>
+            		<p>
+            			<b>Email: </b>
+            			#{showUser.user.email}
+            		</p>
+            		<p>
+            			<b>Phone: </b>
+            			#{showUser.user.phone}
+            		</p>
+            		 <h:link outcome="Welcome" class="btn btn-primary" value="back" />
+            	</div>
+            	<div>
+            			<img src="#{request.contextPath}/resources/#{showUser.user.picture}" style="width: 35%; height: 35%"/>
+            	</div>
+             </h:form>
+       
+        </ui:define>
+    </ui:composition>
+     
+</html>

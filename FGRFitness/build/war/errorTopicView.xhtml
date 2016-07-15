@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Error</h1>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Topic already exists.
+            </div>
+            <h:form>
+             <div class="text-right">
+                    <div class="btn-group text-right" role="group">
+                    <h:link outcome="AddTopicView" class="btn btn-primary" value="back" />
+                    </div>
+             </div>
+             </h:form>
+        </ui:define>
+    </ui:composition>
+    
+   
+</html>

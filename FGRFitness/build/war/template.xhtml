@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FGR Fitness</title>
+        <link href="#{request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="#{resource['css:theme.css']}" rel="stylesheet" />  
+        <link href="#{resource['css:jquery-ui.css']}" rel="stylesheet" />
+    </h:head>
+
+    <h:body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <h:link outcome="Welcome" class="navbar-brand">
+                    <span class="glyphicon glyphicon-road" aria-hidden="true"></span> 
+                       <b>FGR</b>Fitness
+                    </h:link>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                    <ui:fragment rendered="#{login.logged}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My profile <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <ui:fragment rendered="#{login.logged}">
+                                <li><h:link outcome="ShowUserView">View my profile</h:link></li>
+                                <li><h:link outcome="UpdatePersonalDataView">Update personal data</h:link></li>
+                                </ui:fragment>
+                            </ul>
+                        </li>
+                    </ui:fragment>
+                    
+                     <ui:fragment rendered="#{login.logged}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forum <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <ui:fragment rendered="#{login.logged}">
+                                <li><h:link outcome="TopicListView">All the topics</h:link></li>
+                                <ui:fragment rendered="#{login.logged and !login.isManager}">
+                                <li><h:link outcome="MyMessagesView">View my messages</h:link></li>
+                                </ui:fragment>  
+                                </ui:fragment>
+                            </ul>
+                        </li>
+                    </ui:fragment>
+                    
+                    
+                    <ui:fragment rendered="#{login.logged and !login.isManager}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activity<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <ui:fragment rendered="#{login.isMember}">
+                                <li><h:link outcome="SearchActivityView">Search activity</h:link></li>
+                                <li><h:link outcome="ActivitiesPerMemberView">View my activities</h:link></li>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{login.isTrainer}">
+                                <li><h:link outcome="MyActivitiesView">My activities</h:link></li>
+                                <li><h:link outcome="CategoryListView">All the categories</h:link></li>
+                                <li><h:link outcome="AddActivityView">Add activity</h:link></li>
+                                </ui:fragment>  
+                            </ul>
+                        </li>
+                    </ui:fragment>
+                    
+                    
+                     <ui:fragment rendered="#{login.logged and login.isManager}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users management<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><b>Search an user</b></li>
+                                <li><h:link outcome="SearchTrainerView">Search trainer</h:link></li>
+                                <li><h:link outcome="SearchMemberView">Search member</h:link></li>
+                                <li><h:link outcome="SearchManagerView">Search manager</h:link></li>
+                                 <li role="separator" class="divider"></li>
+                                <li><b>Register new user</b></li>
+                                <li><h:link outcome="RegisterManagerView">Register new manager</h:link></li>
+                                <li><h:link outcome="RegisterMemberView">Register new member</h:link></li>
+                                <li><h:link outcome="RegisterTrainerView">Register new trainer</h:link></li>
+                            </ul>
+                        </li>
+                    </ui:fragment>
+                    
+                        <li>
+                            <ui:fragment rendered="#{!login.logged}">
+                            <h:form class="navbar-form navbar-right"><h:link outcome="loginView" class="btn btn-success" value="Login" /></h:form>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{login.logged}">
+                            <h:form class="navbar-form navbar-right"><h:commandButton action="#{login.out}" class="btn btn-danger" value="Logout" onclick="Logout()"/></h:form>
+                            </ui:fragment>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>-
+        <div class="container" role="main">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+             <script src="#{resource['js:bootstrap.min.js']}"></script>
+             <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+			 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+			 <script src="jquery.ui.datepicker-es.js"></script>
+			 <script type="text/javascript">
+				$(function () {
+				$(".datepicker").datepicker({
+				dateFormat: 'dd-mm-yy',
+			 	changeMonth:true,
+			 	changeYear:true
+				});
+				});
+			</script>
+			
+			<script type="text/javascript">
+ 			function Logout()
+ 			{
+  				var response = confirm('Are you sure you wanna logout?');
+ 
+ 				if (response) parent.parent.location.href="Welcome";
+ 				else alert("You will not logout.");
+ 			}
+ 			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddUser() {
+		    alert("User added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddTopic() {
+		    alert("Topic added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddComment() {
+		    alert("Comment added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmSaveChanges() {
+		    alert("Changes saved");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddCard() {
+		    alert("Card added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddCategory() {
+		    alert("Category added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmAddActivity() {
+		    alert("Category added");
+			}
+			</script>
+		
+				<script type="text/javascript">
+			function ConfirmAddActivity() {
+		    alert("Activity added");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmJoinActivity() {
+			    alert("Registered in activity");
+			}
+			</script>
+		
+			<script type="text/javascript">
+			function ConfirmRemoveActivity() {
+		    alert("Removed from activity");
+			}
+			</script>
+			
+			<script type="text/javascript">
+			function ConfirmMyActivityRemoved() {
+			    alert("Activity removed");
+			}
+			</script>
+			<script type="text/javascript">
+			function ConfirmDeleteUser() {
+				alert("User removed");
+			}
+			</script>
+		
+    </h:body>
+</html>
+

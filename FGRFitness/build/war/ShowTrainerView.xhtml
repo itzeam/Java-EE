@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="id" value="#{showTrainer.id}"/>
+    </f:metadata>
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Show Trainer</h1>
+            </div>
+            <h:form>
+            <div class="col-md-6">
+            		<p>
+            			<b>Id: </b>
+            			#{showTrainer.trainer.id}
+            		</p>
+            		<p>
+            			<b>Name: </b>
+            			#{showTrainer.trainer.name}
+            		</p>
+            		<p>
+            			<b>Surname: </b>
+            			#{showTrainer.trainer.surname}
+            		</p>
+            		<p>
+            			<b>Address: </b>
+            			#{showTrainer.trainer.address}
+            		</p>
+            		<p>
+            			<b>Email: </b>
+            			#{showTrainer.trainer.email}
+            		</p>
+            		<p>
+            			<b>Phone: </b>
+            			#{showTrainer.trainer.phone}
+            		</p>
+            		<h:commandLink action="#{removingUser.deleteUser}" onclick="ConfirmDeleteUser()">
+                            <f:param name="id" value="#{showTrainer.trainer.id}" />
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            delete
+                    </h:commandLink>
+            	 <h:link outcome="SearchTrainerView" class="btn btn-primary" value="back" />
+            </div>
+            <div>
+            			<img src="#{request.contextPath}/resources/#{showTrainer.trainer.picture}" style="width: 35%; height: 35%"/>
+            </div>
+           </h:form>
+        </ui:define>
+    </ui:composition>
+     
+</html>

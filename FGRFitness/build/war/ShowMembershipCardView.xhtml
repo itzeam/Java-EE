@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <f:metadata>
+        <f:viewParam name="cardId" value="#{showCard.cardId}"/>
+    </f:metadata>
+      <ui:fragment rendered="#{!login.logged}">
+                <div class="alert alert-warning" role="alert">
+                    You need to be <strong>member</strong>.
+                </div>
+            </ui:fragment>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <div class="page-header">
+                <h1>Member card</h1>
+            </div>
+            <div>
+            	<div class="col-md-6">
+            		<p>
+            			<b>Id: </b>
+            			#{showCard.card.cardId}
+            		</p>
+            		<p>
+            			<b>Name: </b>
+            			#{showCard.card.cardType}
+            		</p>
+            		<p>
+            			<b>Surname: </b>
+            			#{showCard.card.price}
+            		</p>
+            			<f:facet name="header">
+                        	<h:outputText value="Add card"/>
+                       	</f:facet>
+                     	<h:link outcome="UpdateMembershipCardView"> Update
+                               <f:param name="cardId" value="#{showCard.card.cardId}" />
+                               <span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span>
+                        </h:link>
+
+            	<hr/>
+            </div>
+            	<h:form>
+             <div class="text-right">
+                    <div class="btn-group text-right" role="group">
+                    <h:link outcome="SearchMemberView" class="btn btn-primary" value="back" />
+                    </div>
+             </div>
+             </h:form>
+            </div>
+            </ui:define>
+    </ui:composition>
+</html>
+
+ 
